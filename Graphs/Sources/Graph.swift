@@ -52,8 +52,10 @@ extension Graph where Element: Hashable {
                 }
                 
                 getEdges(pathend)
-                    .filter {
-                        !path.map{ $0.source }.contains($0.destination)
+                    .filter { pathEndEdge in
+                        !path.map{ currentPathEdge in
+                            currentPathEdge.source
+                        }.contains(pathEndEdge.destination)
                     }
                     .forEach {
                         activePaths.insert(path + [$0])
