@@ -42,4 +42,16 @@ final class DijkstraTestCase: XCTestCase {
   } ()
 }
 
+private extension String {
+    init?(shortestPath: [Graph.Edge]) {
+        guard !shortestPath.isEmpty else {
+            return nil
+        }
+        
+        self = shortestPath.reduce(into: shortestPath[0].source.element) { string, edge in
+            string += edge.destination.element
+        }
+    }
+}
+
 
