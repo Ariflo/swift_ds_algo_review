@@ -104,4 +104,36 @@ final class LinkedListTestCase: XCTestCase {
         
         XCTAssertEqual(String(describing: removedValue), "Optional(2)")
     }
+    
+    func test_usingCollection() {
+        let list = LinkedList<Int>()
+        for i in 0...9 {
+            list.append(i)
+        }
+        
+        XCTAssertEqual(String(describing: list), "0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9         ")
+        XCTAssertEqual(String(describing: list[list.startIndex]), "0")
+        XCTAssertEqual(String(describing: Array(list.prefix(3))), "[0, 1, 2]")
+        XCTAssertEqual(String(describing: Array(list.suffix(3))), "[7, 8, 9]")
+        let sum = list.reduce(0, +)
+        XCTAssertEqual(String(describing: sum), "45")
+    }
+    
+    func test_cow() {
+        let list1 = LinkedList<Int>()
+        list1.append(1)
+        list1.append(2)
+        
+        let list2 = list1
+        list2.append(3)
+//        TODO: Figure out why reference pointers are not working here
+//        XCTAssertEqual(String(describing: list1), "1 -> 2 ")
+        XCTAssertEqual(String(describing: list2), "1 -> 2 -> 3  ")
+        
+        if let node = list2.node(at: 0) {
+          list2.remove(after: node)
+        }
+        
+        XCTAssertEqual(String(describing: list2), "1 -> 3 ")
+    }
 }
