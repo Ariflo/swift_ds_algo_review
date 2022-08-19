@@ -6,7 +6,7 @@ final class SinglyLinkedListTestCase: XCTestCase {
     let node2 = Node(value: 2)
     let node3 = Node(value: 3)
     
-    let list = SinglyLinkedList<Int>()
+    var list = SinglyLinkedList<Int>()
     
     func test_linkingNodes() {
         node1.next = node2
@@ -77,7 +77,7 @@ final class SinglyLinkedListTestCase: XCTestCase {
     }
     
     func test_usingCollection() {
-        let list = SinglyLinkedList<Int>()
+        var list = SinglyLinkedList<Int>()
         for i in 0...9 {
             list.append(i)
         }
@@ -91,20 +91,190 @@ final class SinglyLinkedListTestCase: XCTestCase {
     }
     
     func test_cow() {
-        let list1 = SinglyLinkedList<Int>()
+        var list1 = SinglyLinkedList<Int>()
         list1.append(1)
         list1.append(2)
         
-        let list2 = list1
+        var list2 = list1
         list2.append(3)
-//        TODO: Figure out why reference pointers are not working here
-//        XCTAssertEqual(String(describing: list1), "1 -> 2 ")
+
+        XCTAssertEqual(String(describing: list1), "1 -> 2 ")
         XCTAssertEqual(String(describing: list2), "1 -> 2 -> 3  ")
         
         if let node = list2.node(at: 0) {
-          list2.remove(after: node)
+             list2.remove(after: node)
         }
         
         XCTAssertEqual(String(describing: list2), "1 -> 3 ")
+    }
+    
+    func test_reverse() {
+        var list = SinglyLinkedList<Int>()
+        
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        
+        XCTAssertEqual(String(describing: list.reversed()), "3 2 1 ")
+    }
+    
+    func test_get_middle_node() {
+        var list = SinglyLinkedList<Int>()
+        
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        list.append(4)
+        
+        XCTAssertEqual(list.getMiddleNode()?.value, 3)
+        
+        var list2 = SinglyLinkedList<Int>()
+        
+        list2.append(1)
+        list2.append(2)
+        list2.append(3)
+        
+        XCTAssertEqual(list2.getMiddleNode()?.value, 2)
+    }
+    
+    func test_reverse_list() {
+        var list = SinglyLinkedList<Int>()
+        
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        list.append(4)
+        
+        XCTAssertEqual(String(describing: list), "1 -> 2 -> 3 -> 4   ")
+        list.reverseList()
+        XCTAssertEqual(String(describing: list), "4 -> 3 -> 2 -> 1   ")
+    }
+    
+    func test_merge_two_lists() {
+        var list1 = SinglyLinkedList<Int>()
+        
+        list1.append(-1)
+        list1.append(4)
+        list1.append(10)
+        list1.append(11)
+        
+        var list2 = SinglyLinkedList<Int>()
+        
+        list2.append(1)
+        list2.append(2)
+        list2.append(3)
+        list2.append(6)
+        
+        func merge(_ list1: SinglyLinkedList<Int>, _ list2: SinglyLinkedList<Int>) -> SinglyLinkedList<Int>? {
+            guard !list1.isEmpty && !list2.isEmpty else {
+                return nil // Return nil if both lists are empty
+            }
+            
+            guard !list1.isEmpty else {
+                return list2 // Return list2 if list1 is empty
+            }
+            
+            guard !list2.isEmpty else {
+                return list1 // Return list1 if list2 is empty
+            }
+            
+            var p1 = list1.head // Pointer to current node in list1
+            var p2 = list2.head // Pointer to current node in list2
+            var result = SinglyLinkedList<Int>() // Initialize the result list
+            
+            // While there are elements in both lists
+            while p1 != nil && p2 != nil {
+                if p1!.value <= p2!.value {
+                    result.append(p1!.value)
+                    p1 = p1!.next // Move to the next node in list1
+                } else {
+                    result.append(p2!.value)
+                    p2 = p2!.next // Move to the next node in list2
+                }
+            }
+            
+            // Append remaining elements (if any) from list1
+            while p1 != nil {
+                result.append(p1!.value)
+                p1 = p1!.next
+            }
+            
+            // Append remaining elements (if any) from list2
+            while p2 != nil {
+                result.append(p2!.value)
+                p2 = p2!.next
+            }
+            
+            return result
+        }
+        
+        XCTAssertEqual(String(describing: merge(list1, list2)), "Optional(-1 -> 1 -> 2 -> 3 -> 4 -> 6 -> 10 -> 11       )")
+    }
+    
+    func test_remove_all_occurences() {
+        var list = SinglyLinkedList<Int>()
+        
+        list.append(-1)
+        list.append(4)
+        list.append(4)
+        list.append(4)
+        list.append(10)
+        list.append(11)
+        
+        list.remove(all: 4)
+        
+        XCTAssertEqual(String(describing: list), "-1 -> 10 -> 11  ")
+        
+        var list2 = SinglyLinkedList<Int>()
+        
+        list2.append(1)
+        list2.append(3)
+        list2.append(3)
+        list2.append(3)
+        list2.append(3)
+        list2.append(11)
+        
+        list2.remove(all: 3)
+        
+        XCTAssertEqual(String(describing: list2), "1 -> 11 ")
+        
+        var list3 = SinglyLinkedList<Int>()
+        
+        list3.append(1)
+        list3.append(2)
+        list3.append(3)
+        list3.append(3)
+        list3.append(3)
+        list3.append(11)
+        
+        list3.remove(all: 2)
+        
+        XCTAssertEqual(String(describing: list3), "1 -> 3 -> 3 -> 3 -> 11    ")
+        
+        var list4 = SinglyLinkedList<Int>()
+        
+        list4.append(1)
+        list4.append(2)
+        list4.append(3)
+        list4.append(3)
+        list4.append(3)
+        list4.append(11)
+        
+        list4.remove(all: 11)
+        
+        XCTAssertEqual(String(describing: list4), "1 -> 2 -> 3 -> 3 -> 3    ")
+        
+        var list5 = SinglyLinkedList<Int>()
+        
+        list5.append(1)
+        list5.append(2)
+        list5.append(3)
+        list5.append(3)
+        list5.append(3)
+        list5.append(11)
+        
+        list5.remove(all: 1)
+        
+        XCTAssertEqual(String(describing: list5), "2 -> 3 -> 3 -> 3 -> 11    ")
     }
 }
