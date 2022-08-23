@@ -12,6 +12,26 @@ class DoublyLinkedList<Value> {
         head
     }
     
+    var last: Node<Value>? {
+        tail
+    }
+    
+    func prepend(_ value: Value) {
+        let newNode = Node(value: value)
+        
+        guard let headNode = head else {
+            head = newNode
+            tail = newNode
+            return
+        }
+        
+        newNode.previous = nil
+        newNode.next = headNode
+        headNode.previous = newNode
+        
+        head = newNode
+    }
+    
     func append(_ value: Value) {
         let newNode = Node(value: value)
         
@@ -25,6 +45,7 @@ class DoublyLinkedList<Value> {
         tailNode.next = newNode
         tail = newNode
     }
+    
     
     func remove(_ node: Node<Value>) -> Value {
         let prev = node.previous
