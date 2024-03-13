@@ -1,5 +1,13 @@
 struct Stack<Element: Equatable>: Equatable {
+    static func == (lhs: Stack<Element>, rhs: Stack<Element>) -> Bool {
+        lhs.storage == rhs.storage
+    }
+    
     private var storage = [Element]()
+    
+    var isEmpty: Bool  {
+        return peek() == nil
+    }
     
     init() {}
     
@@ -11,22 +19,18 @@ struct Stack<Element: Equatable>: Equatable {
         return storage.last
     }
     
-    func isEmpty() -> Bool  {
-        return peek() == nil
-    }
-    
     mutating func push(_ element: Element) {
         storage.append(element)
     }
     
     @discardableResult
     mutating func pop() -> Element? {
-        return storage.removeLast()
+        return storage.popLast()
     }
 }
 
-extension Stack: CustomStringConvertible {
-    var description: String {
+extension Stack: CustomDebugStringConvertible {
+    var debugDescription: String {
         return storage
             .map { "\($0)"}
             .joined(separator: " ")
