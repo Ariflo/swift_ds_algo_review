@@ -25,6 +25,9 @@
 		0A7AA60021EDA24300A15DA7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7AA5FF21EDA24300A15DA7 /* Queue.swift */; };
 		0ABC822E21E86A5A0008D749 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC822D21E86A5A0008D749 /* Stack.swift */; };
 		0ABC823121E86AC90008D749 /* StackTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC822F21E86AB20008D749 /* StackTestCase.swift */; };
+		B34322452BC06AA8003C50EE /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34322442BC06AA8003C50EE /* Buffer.swift */; };
+		B34322472BC06ABC003C50EE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34322462BC06ABC003C50EE /* Node.swift */; };
+		B34322492BC06AD7003C50EE /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34322482BC06AD7003C50EE /* DoublyLinkedList.swift */; };
 		OBJ_39 /* DataStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "DataStructures::DataStructures::Product" /* DataStructures.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		0A7AA5FF21EDA24300A15DA7 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0ABC822D21E86A5A0008D749 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		0ABC822F21E86AB20008D749 /* StackTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTestCase.swift; sourceTree = "<group>"; };
+		B34322442BC06AA8003C50EE /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
+		B34322462BC06ABC003C50EE /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		B34322482BC06AD7003C50EE /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		"DataStructures::DataStructures::Product" /* DataStructures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"DataStructures::DataStructuresTests::Product" /* DataStructuresTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataStructuresTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,6 +79,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B34322432BC06A7F003C50EE /* Queue Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				B34322442BC06AA8003C50EE /* Buffer.swift */,
+				B34322462BC06ABC003C50EE /* Node.swift */,
+				B34322482BC06AD7003C50EE /* DoublyLinkedList.swift */,
+			);
+			path = "Queue Data Structures";
+			sourceTree = "<group>";
+		};
 		OBJ_11 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +110,7 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B34322432BC06A7F003C50EE /* Queue Data Structures */,
 				0ABC822D21E86A5A0008D749 /* Stack.swift */,
 				0A7AA5FF21EDA24300A15DA7 /* Queue.swift */,
 			);
@@ -172,6 +189,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = OBJ_5;
@@ -192,8 +210,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				B34322492BC06AD7003C50EE /* DoublyLinkedList.swift in Sources */,
 				0ABC822E21E86A5A0008D749 /* Stack.swift in Sources */,
 				0A7AA60021EDA24300A15DA7 /* Queue.swift in Sources */,
+				B34322452BC06AA8003C50EE /* Buffer.swift in Sources */,
+				B34322472BC06ABC003C50EE /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
