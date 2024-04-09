@@ -1,4 +1,4 @@
-struct SinglyLinkedList<Value: Equatable> {
+struct SinglyLinkedList<Value: Comparable> {
     var head: Node<Value>?
     var tail: Node<Value>?
     
@@ -213,6 +213,51 @@ struct SinglyLinkedList<Value: Equatable> {
         }
         
         tail = prev
+    }
+}
+
+extension SinglyLinkedList {
+    func merge( with list: SinglyLinkedList<Value>) -> SinglyLinkedList<Value>? {
+        guard !isEmpty && !list.isEmpty else {
+            return nil // Return nil if both lists are empty
+        }
+        
+        guard !isEmpty else {
+            return list // Return list2 if list1 is empty
+        }
+        
+        guard !list.isEmpty else {
+            return list // Return list1 if list2 is empty
+        }
+        
+        var p1 = head // Pointer to current node
+        var p2 = list.head // Pointer to current node in list
+        var result = SinglyLinkedList<Value>() // Initialize the result list
+        
+        // While there are elements in both lists
+        while p1 != nil && p2 != nil {
+            if p1!.value <= p2!.value {
+                result.append(p1!.value)
+                p1 = p1!.next // Move to the next node in list1
+            } else {
+                result.append(p2!.value)
+                p2 = p2!.next // Move to the next node in list2
+            }
+        }
+        
+        // Append remaining elements (if any) from list1
+        while p1 != nil {
+            result.append(p1!.value)
+            p1 = p1!.next
+        }
+        
+        // Append remaining elements (if any) from list2
+        while p2 != nil {
+            result.append(p2!.value)
+            p2 = p2!.next
+        }
+        
+        return result
     }
 }
 

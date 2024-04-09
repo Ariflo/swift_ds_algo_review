@@ -1,4 +1,4 @@
-class Node <Value> {
+class Node <Value: Comparable> {
     var value: Value
     var next: Node?
     

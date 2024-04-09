@@ -165,50 +165,7 @@ final class SinglyLinkedListTestCase: XCTestCase {
         list2.append(3)
         list2.append(6)
         
-        func merge(_ list1: SinglyLinkedList<Int>, _ list2: SinglyLinkedList<Int>) -> SinglyLinkedList<Int>? {
-            guard !list1.isEmpty && !list2.isEmpty else {
-                return nil // Return nil if both lists are empty
-            }
-            
-            guard !list1.isEmpty else {
-                return list2 // Return list2 if list1 is empty
-            }
-            
-            guard !list2.isEmpty else {
-                return list1 // Return list1 if list2 is empty
-            }
-            
-            var p1 = list1.head // Pointer to current node in list1
-            var p2 = list2.head // Pointer to current node in list2
-            var result = SinglyLinkedList<Int>() // Initialize the result list
-            
-            // While there are elements in both lists
-            while p1 != nil && p2 != nil {
-                if p1!.value <= p2!.value {
-                    result.append(p1!.value)
-                    p1 = p1!.next // Move to the next node in list1
-                } else {
-                    result.append(p2!.value)
-                    p2 = p2!.next // Move to the next node in list2
-                }
-            }
-            
-            // Append remaining elements (if any) from list1
-            while p1 != nil {
-                result.append(p1!.value)
-                p1 = p1!.next
-            }
-            
-            // Append remaining elements (if any) from list2
-            while p2 != nil {
-                result.append(p2!.value)
-                p2 = p2!.next
-            }
-            
-            return result
-        }
-        
-        XCTAssertEqual(String(describing: merge(list1, list2)), "Optional(-1 -> 1 -> 2 -> 3 -> 4 -> 6 -> 10 -> 11       )")
+        XCTAssertEqual(String(describing: list1.merge(with: list2)), "Optional(-1 -> 1 -> 2 -> 3 -> 4 -> 6 -> 10 -> 11       )")
     }
     
     func test_remove_all_occurences() {
